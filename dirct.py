@@ -3,7 +3,7 @@ import sys
 from openpyxl import Workbook
 from openpyxl.reader.excel import load_workbook
 
-name = [] 
+name = [] #test
 phone = []
 first = []
 last = []
