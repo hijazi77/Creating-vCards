@@ -1,39 +1,34 @@
-import csv
-import sys
 from openpyxl import Workbook
 from openpyxl.reader.excel import load_workbook
 
-name = [] #test
+name = [] 
 phone = []
 first = []
 last = []
 
-wb = load_workbook('auto.xlsx')
+wb = load_workbook('contacts.xlsx')
 ws = wb.active
-
-
+input = int(input('How many contact you need in each file: '))
 c = 1
-for i in range(807):
+for i in range(ws.max_row):
   name.append(ws[f'A{c}'].value)
   first.append(ws[f'B{c}'].value)
   last.append(ws[f'C{c}'].value)
   phone.append(ws[f'D{c}'].value)
   c+=1
   
-print(last[1]+" and "+phone[1])
 
+file = 1
 
-file =28
-
-for i in range(4):
-  with open(f'folder/file{file}.vcf', 'w' , encoding="utf-8") as myfile:
+for i in range(int(ws.max_row/input)):
+  with open(f'folder/file number-{file}.vcf', 'w' , encoding="utf-8") as myfile:
     count = 0
-    for contact in range(249):
+    for contact in range(input):
       myfile.write( 'BEGIN:VCARD' + "\n")
       myfile.write( 'VERSION:2.1' + "\n")
       myfile.write( 'N:' + str(last[count]) + ';' + (first[count]) + "\n")
       myfile.write( 'FN:' +str(name[count])+ "\n")
-      myfile.write( 'ORG:' + 'IBM' + "\n")
+      myfile.write( 'ORG:' + 'hijazi77' + "\n")
       myfile.write( 'TEL;CELL:' + str(phone[count])+ "\n")
       myfile.write( 'END:VCARD' + "\n")
       myfile.write( "\n")
@@ -44,6 +39,5 @@ for i in range(4):
       count+= 1
     myfile.close()
   file +=1
-  print(f'file{file} has been created')
 
-    
+  print(f'file number -{file}- has been created')
